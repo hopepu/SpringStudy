@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j2;
 public class SampleHotel {
 	
 	private Chef chef;
-	private String HotelName;
+	private /* final */ String HotelName;
 	private Date HotelAge;
 	
 	
