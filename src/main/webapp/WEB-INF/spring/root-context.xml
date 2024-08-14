@@ -36,9 +36,9 @@
 	</bean>
 	
 	<!--  mybatis 용으로 검색 적용 해주세요!!! -->
-	<mybatis-spring:scan base-package="net.kkwcloud.mapper"/>
+	<mybatis-spring:scan base-package="org.zerock.mapper"/>
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 하단에 있는 네임 스페이스 탭에서 context-scan을 체크해야 자동완성 적용됨 -->
-	<context:component-scan	base-package="net.kkwcloud.sample"/>
+	<context:component-scan	base-package="org.zerock.service"/>
 </beans>
