@@ -29,7 +29,7 @@
 
 <select id="read" resultType="org.zerock.domain.BoardVO">
 	<![CDATA[
-		select*from tbl_board where bno = #{bno}
+		select * from tbl_board where bno = #{bno}
 	]]>
 </select>
 
