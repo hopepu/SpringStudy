@@ -31,6 +31,25 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<!--  json 추가  -->
+		<!--  https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind  -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.6</version>
+		</dependency>
+		<!--  https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml  -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<version>2.9.6</version>
+		</dependency>
+		<!--  https://mvnrepository.com/artifact/com.google.code.gson/gson  -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.2</version>
+		</dependency>
 		<dependency>
 			<!-- test 코드 활성화 적용 p54  -->
 			<groupId>org.springframework</groupId>

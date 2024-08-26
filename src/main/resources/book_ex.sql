@@ -24,5 +24,25 @@ insert into tbl_board (bno, title, content, writer) values(seq_board.nextval, 't
 insert into tbl_board (bno, title, content, writer) values(seq_board.nextval, 'test title6', 'test content6', 'user06');
 insert into tbl_board (bno, title, content, writer) values(seq_board.nextval, 'test title7', 'test content7', 'user07');
 
+create table tbl_reply(
+	rno number(10,0),
+	bno number(10,0) not null,
+	reply varchar2(1000) not null,
+	replyer varchar2(50) not null,
+	replyDate date default sysdate,
+	updateDate date default sysdate	
+);
 
+create sequence seq_reply;
+
+alter table tbl_reply add constraint pk_reply primary key(rno);
+
+alter table tbl_reply add constraint fk_reply_board foreign key(bno) references tbl_board (bno);
+
+select * from tbl_reply order by rno desc;
+
+select * from tbl_board;
+
+insert into tbl_reply (rno, bno, reply, replyer)
+		values (seq_reply.nextval, '312', '리뷰 테스트', '테스터');
 
