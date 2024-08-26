@@ -1,11 +1,14 @@
 package org.zerock.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -21,7 +24,8 @@ public class BoardMapperTests { // 테스트용 코드
 	@Test // 메서드별로 테스트 JUnit
 	public void testGetList() {
 		
-		mapper.getList().forEach(board -> log.info(board));
+		//mapper.getList().forEach(board -> log.info(board));
+		mapper.getListWithPaging(new Criteria(2,4)).forEach(board -> log.info(board));
 		
 	}	
 	
@@ -29,13 +33,16 @@ public class BoardMapperTests { // 테스트용 코드
 	public void testInsert() {
 	
 		BoardVO boardVO = new BoardVO(); // 빈객체 생성
-		boardVO.setTitle("매퍼로만든 제목");
-		boardVO.setContent("매퍼로만든 내용");
-		boardVO.setWriter("매퍼사용자"); // 객체에 내용 삽입완료
+		
+		for(int i = 0; i<300; i++) {
+		boardVO.setTitle("매퍼로만든 제목 " + i);
+		boardVO.setContent("매퍼로만든 내용 " + i);
+		boardVO.setWriter("매퍼사용자 " + i); // 객체에 내용 삽입완료
 		
 		mapper.insert(boardVO);
-		
 		log.info("입력된 객체 : " + boardVO);
+		}
+		
 		
 	}
 	
@@ -82,6 +89,29 @@ public class BoardMapperTests { // 테스트용 코드
 		
 		log.info("삭제한 개수 : " + mapper.delete(3L));
 		
+	}
+	
+	@Test
+	public void testPaging() {
+		Criteria cri = new Criteria();
+		cri.setPageNum(2);
+		cri.setAmount(4);
+		
+		List<BoardVO> list = mapper.getListWithPaging(cri);
+		
+		list.forEach(board -> log.info(board));
+		
+	}
+	
+	@Test
+	public void testSearch() {
+		Criteria cri = new Criteria();
+		cri.setKeyword("new");
+		cri.setType("TC");
+		
+		List<BoardVO> list = mapper.getListWithPaging(cri);
+		
+		list.forEach(board -> log.info(board));
 	}
 	
 	

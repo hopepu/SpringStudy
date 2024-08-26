@@ -21,7 +21,7 @@
 			<div class="panel-heading">Board Modify page</div>
 			<div class="panel-body">
 				<!-- form박스 만들고 submit 처리 -->
-				<form role="form" action="/board/modify" method="post">
+				<form id='operForm' action="/board/modify" method="post">
 					<div class="form-group">
 						<label>No.</label> 
 						<input class="form-control" name="bno" value='<c:out value="${board.bno}"/>' readonly="readonly"/>
@@ -52,15 +52,26 @@
 						<input class="form-control" name="updateDate" value='<fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate}"/>' readonly="readonly"/>
 					</div> <!-- .form-group end  -->
 					
-					<button type="submit" data-oper='modify' class="btn btn-primary">modify</button>
-					<button type="submit" data-oper='remove' class="btn btn-danger">delete</button>
-					<button type="submit" data-oper='list' class="btn btn-info">list</button>
+					<button data-oper='modify' class="btn btn-primary">modify</button>
+					<button data-oper='remove' class="btn btn-danger">delete</button>
+					<button data-oper='list' class="btn btn-info" >list</button>
 					
 					<!-- submit이 많은 경우에는 js를 이용해서 분기처리 -->
 				
 				</form> <!-- form end -->
-			
-			
+				
+				<form id='operForm' action="/board/remove" method="post">
+					<input type='hidden' id='bno' name='bno'
+						value='<c:out value="${board.bno}"/>'/>
+					
+				</form>
+				
+				<form id='operForm' action="/board/list" method='get'>
+					<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
+					<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
+					<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
+					<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>  
+				</form>
 			</div> <!-- .panel-body end -->
 
 		</div> <!-- .panel panel-default end -->
@@ -68,32 +79,32 @@
 </div><!-- .row end -->
 
 <script type="text/javascript">
-$(document).ready(function(){
-	var formObj = $("form"); /* 상단 코드중에 form태그를 formObj로 관여하겟다 */
-	
-	$('button').on("click", function(e){
+	$(document).ready(function(e) {
+		var operForm = $("#operForm"); /* <form id='operForm' action="/board/modify" method="get"> */
 		
-		e.preventDefault(); /* button 기본동작을 안 쓰겟다. submit 안됨 */
+		/* e.preventDefault(); */
 		
-		var operation = $(this).data("oper");/* data-oper = modify, remove, list */
+		console.log(operForm);
 		
-		console.log(operation);/* 개발자 도구 콘솔에 찍힘 */
-		
-		if(operation === 'remove'){/*data-oper = 'remove' */
-			formObj.attr("action", "/board/remove");/* 삭제 컨트롤러 요청 */
-		} else if(operation === 'list'){
-			self.location="/board/list";
-			return;
-		} 
-		formObj.submit();/* data-oper='modify' */
+		 $("button[data-oper='modify']").on("click",function(e){
+			operForm.attr("action", "/board/modify").submit();
+		});
 		
 		
-	})
-})
+		$("button[data-oper='remove']").on("click",function(e){
+			operForm.attr("action", "/board/remove");
+		});
+		
+		$("button[data-oper='list']").on("click",function(e){
+			operForm.find("#bno").remove(); /* input에 있는 bno를 삭제*/
+			operForm.attr("action", "/board/list").submit();
+		});
+		
+	});
 
 </script>
 
 
 
-
+<%@ include file="../includes/footer.jsp"%>
 

@@ -59,9 +59,19 @@
 				<%-- onclick="location.href='/board/list" --%>
 
 				<!-- 수정 버튼을 클릭시 bno를 가지고 가도록 설정 -->
-				<form id='operForm' action="/board/modify" method="get">
-					<input type='hidden' id='bno' name='bno'
-						value='<c:out value="${board.bno}"/>' />
+				<form id='operForm' action="/boad/modify" method="get">
+					<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
+					<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
+					<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
+					<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
+					<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>  
+ 				</form>
+				 
+				<form id='operForm' action="/board/list" method='get'>
+					<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
+					<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
+					<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
+					<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>  
 				</form>
 
 				<!-- </form> form end -->
@@ -78,7 +88,9 @@
 <!-- .row end -->
 
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(function(e) {
+		
+	
 		var operForm = $("#operForm"); /* <form id='operForm' action="/board/modify" method="get"> */
 		
 		$("button[data-oper='modify']").on("click",function(e){
@@ -96,5 +108,5 @@
 
 
 
-
+<%@include file="../includes/footer.jsp"%>
 

@@ -73,6 +73,15 @@ public class BoardControllerTests {
 		log.info("결과 url : " + resultPage);
 	}
 	
+	@Test
+	public void testListPaging() throws Exception{
+		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list")
+				.param("pageNum", "2")
+				.param("amount", "3"))
+				.andReturn().getModelAndView().getModelMap());
+		
+		
+	}
 	
 
 }

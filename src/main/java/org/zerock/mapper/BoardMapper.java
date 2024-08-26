@@ -3,6 +3,7 @@ package org.zerock.mapper;
 import java.util.List;
 
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 
 
 public interface BoardMapper {
@@ -11,7 +12,7 @@ public interface BoardMapper {
 		
 	// 인터페이스에 자체적인 추상메서드를 활용
 	//@Select("select * from tbl_board where bno > 0") // where bno > 0 -> bno가 pk라 인덱싱이 되어 있어 빠름
-	public List<BoardVO> getList();
+	//public List<BoardVO> getList();
 	// 리턴은 List<BoardVO>임으로 배열 안쪽에 객체가 BoardVO로 완성 됨
 	
 	// board 삽입용 코드 -> 데이터베이스에서 bno sequence를 통해서 만들어져서 콘솔에서 바로 확인 불가
@@ -28,5 +29,13 @@ public interface BoardMapper {
 	
 	// 게시물의 번호를 받아 객체를 삭제한다.
 	public int delete(Long bno);
+	
+	// 페이징해서 자료 갖고오기
+	public List<BoardVO> getListWithPaging(Criteria cri);
+	
+	//전체 페이지 수 처리
+	public int getTotalCount(Criteria cri);
+	
+	
 
 }

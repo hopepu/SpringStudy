@@ -47,10 +47,10 @@ public class BoardServiceTests {
 		
 	}
 	
-	@Test
-	public void testGetList() {
-		service.getlist().forEach(board -> log.info(board));
-	}
+	/*
+	 * @Test public void testGetList() { service.getlist().forEach(board ->
+	 * log.info(board)); }
+	 */
 	
 	@Test
 	public void testUpdate() {
